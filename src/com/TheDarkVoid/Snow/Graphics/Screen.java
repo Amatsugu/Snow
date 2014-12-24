@@ -18,7 +18,7 @@ public class Screen
 	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
 
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
-	
+
 	private final int ALPHA_COL = 0xffff00ff;
 
 	public Random random = new Random();
@@ -62,7 +62,7 @@ public class Screen
 			}
 		}
 	}
-	
+
 	public void RenderTextCharacter(int xp, int yp, Sprite sprite, int color, boolean fixed)
 	{
 		if(fixed)

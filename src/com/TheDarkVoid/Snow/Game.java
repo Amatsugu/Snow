@@ -157,7 +157,7 @@ public class Game extends Canvas implements Runnable
 		double xScroll = player.GetX() - screen.width / 2;
 		double yScroll = player.GetY() - screen.height / 2;
 		level.Render((int) xScroll, (int) yScroll, screen);
-		font.Render(10, 100, 0, "hey \nahere \nhere", screen);
+		//font.Render(10, 100, 0, "hey \nahere \nhere", screen);
 		//player.Render(screen);
 		if(key.GetKey(KeyEvent.VK_F3))
 		{
