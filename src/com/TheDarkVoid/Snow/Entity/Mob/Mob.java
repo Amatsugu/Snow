@@ -45,7 +45,7 @@ public abstract class Mob extends Entity
 			{
 				if(!Collision(abs(xa), ya))
 				{
-					this.x += xa;
+					this.x += (xa);
 				}
 				xa = 0;
 			}
@@ -64,11 +64,13 @@ public abstract class Mob extends Entity
 			{
 				if(!Collision(xa, abs(ya)))
 				{
-					this.y += ya;
+					this.y += (ya);
 				}
 				ya = 0;
 			}
 		}
+		//this.x = Math.floor(this.x);
+		//this.y = Math.floor(this.y);
 		//System.out.println(this.y);
 	}
 

@@ -14,7 +14,7 @@ public class PlasmaProjectile extends Projectile
 		range = 200;
 		damage = 20;
 		speed = 4;
-		sprite = Sprite.rotate(Sprite.projectile_arrow, angle);
+		sprite = Sprite.rotate(Sprite.projectile_plasma, angle);
 
 		nx = Math.cos(angle) * speed;
 		ny = Math.sin(angle) * speed;

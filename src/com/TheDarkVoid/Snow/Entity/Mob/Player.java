@@ -1,13 +1,19 @@
 package com.TheDarkVoid.Snow.Entity.Mob;
 
+import java.awt.Color;
+
 import com.TheDarkVoid.Snow.Game;
 import com.TheDarkVoid.Snow.Entity.Projectile.PlasmaProjectile;
 import com.TheDarkVoid.Snow.Entity.Projectile.Projectile;
 import com.TheDarkVoid.Snow.Graphics.AnimatedSprite;
 import com.TheDarkVoid.Snow.Graphics.Screen;
 import com.TheDarkVoid.Snow.Graphics.SpriteSheet;
+import com.TheDarkVoid.Snow.Graphics.UI.UILabel;
+import com.TheDarkVoid.Snow.Graphics.UI.UIManager;
+import com.TheDarkVoid.Snow.Graphics.UI.UIPanel;
 import com.TheDarkVoid.Snow.Input.Keyboard;
 import com.TheDarkVoid.Snow.Input.Mouse;
+import com.TheDarkVoid.Snow.Util.Vector2i;
 
 public class Player extends Mob
 {
@@ -23,12 +29,15 @@ public class Player extends Mob
 
 	private int fireRate = 0;
 	private double playerSpeed = 1.5;
+	
+	private UIManager ui;
 
 	public Player(Keyboard input)
 	{
 		this.input = input;
 		animSprite = down;
 		sprite = animSprite.GetSprite();
+		ui = Game.getUIManager();
 	}
 
 	public Player(int x, int y, Keyboard input)
@@ -39,6 +48,10 @@ public class Player extends Mob
 		animSprite = down;
 		sprite = animSprite.GetSprite();
 		fireRate = PlasmaProjectile.FIRE_RATE;
+		ui = Game.getUIManager();
+		UIPanel panel = new UIPanel(new Vector2i(Game.GetWidth() - (Game.GetWidth()/4),0), new Vector2i(Game.GetWidth()/4, Game.GetHeight()));
+		ui.addPanel(panel);
+		panel.addComponent(new UILabel(new Vector2i(10,35), "Label").setColor(new Color(0xffffff)));
 	}
 
 	public void Update()

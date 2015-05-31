@@ -15,6 +15,7 @@ import com.TheDarkVoid.Snow.Entity.Mob.Player;
 import com.TheDarkVoid.Snow.Graphics.Font;
 import com.TheDarkVoid.Snow.Graphics.Screen;
 import com.TheDarkVoid.Snow.Graphics.Sprite;
+import com.TheDarkVoid.Snow.Graphics.UI.UIManager;
 import com.TheDarkVoid.Snow.Input.Keyboard;
 import com.TheDarkVoid.Snow.Input.Mouse;
 import com.TheDarkVoid.Snow.Level.Level;
@@ -24,9 +25,9 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 	public String title = "Snow";
 	//Screen Size
-	private static int WIDTH = 300;
+	private static int WIDTH = 600;
 	private static int HEIGHT = WIDTH / 16 * 9; //~168
-	private static int SCALE = 3;
+	private static int SCALE = 2;
 	//Thread(s)
 	private Thread thread;
 
@@ -37,6 +38,7 @@ public class Game extends Canvas implements Runnable
 	private Screen screen;
 	private Level level;
 	private Player player;
+	private static UIManager uiManager;
 	@SuppressWarnings("unused")
 	//TODO remove this
 	private Font font;
@@ -60,6 +62,7 @@ public class Game extends Canvas implements Runnable
 		key = new Keyboard();
 		level = Level.spawnLevel;
 		TileCoordinate playerSpawn = new TileCoordinate(20, 20);
+		uiManager = new UIManager();
 		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
 		level.Add(player);
 		font = new Font();
@@ -79,7 +82,12 @@ public class Game extends Canvas implements Runnable
 	{
 		return HEIGHT * SCALE;
 	}
-
+	
+	public static UIManager getUIManager()
+	{
+		return uiManager;
+	}
+	
 	public synchronized void Start()
 	{
 		isRunning = true;
@@ -143,6 +151,7 @@ public class Game extends Canvas implements Runnable
 	{
 		key.Update();
 		level.Update();
+		uiManager.Update();
 	}
 
 	public void Render()
@@ -158,7 +167,6 @@ public class Game extends Canvas implements Runnable
 		double yScroll = player.GetY() - screen.height / 2;
 		level.Render((int) xScroll, (int) yScroll, screen);
 		//font.Render(10, 100, 0, "hey \nahere \nhere", screen);
-		//player.Render(screen);
 		if(key.GetKey(KeyEvent.VK_F3))
 		{
 			isDebug = !isDebug;
@@ -175,9 +183,10 @@ public class Game extends Canvas implements Runnable
 				}
 			}
 		}
-		//screen.RenderSheet(32, 32, SpriteSheet.player_down, false);
-		screen.RenderSprite(0, 0, new Sprite(level.GetTilePixels(), level.GetWidth(), level.GetHeight()), false);
-		screen.RenderSprite((int) player.GetX() / 16, (int) player.GetY() / 16, new Sprite(1, 0xff00ff), false);
+		//screen.RenderSprite(0, 0, new Sprite(level.GetTilePixels(), level.GetWidth(), level.GetHeight()), false);
+		//screen.RenderSprite((int) player.GetX() / 16, (int) player.GetY() / 16, new Sprite(1, 0xff00ff), false);
+		
+		
 		for(int i = 0; i < pixels.length; i++)
 		{
 			pixels[i] = screen.pixels[i];
@@ -185,11 +194,7 @@ public class Game extends Canvas implements Runnable
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.setColor(Color.magenta);
-		//g.setFont(new Font("Helvetica", 0, 20));
-		//g.fillRect(Mouse.GetX()-32, Mouse.GetY()-32, 64, 64);
-		//if(isDebug)
-		//	g.drawString("(" + player.GetX() + "," + player.GetY() + ") M: " + Mouse.GetButton(), 5, 25);
+		uiManager.Render(g);
 		g.dispose();
 		bs.show();
 	}

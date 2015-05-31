@@ -2,7 +2,7 @@ package com.TheDarkVoid.Snow.Util;
 
 public class Vector2i
 {
-	private int x, y;
+	public int x, y;
 
 	public Vector2i()
 	{

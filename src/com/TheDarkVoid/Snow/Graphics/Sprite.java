@@ -32,7 +32,7 @@ public class Sprite
 	public static Sprite projectile_arrow = new Sprite(16, 1, 0, SpriteSheet.projectiles_wizard);
 
 	//Particles
-	public static Sprite particle_basic = new Sprite(2, 0x00);
+	public static Sprite particle_basic = new Sprite(2, 0x00ffff);
 
 	protected Sprite(SpriteSheet sheet, int width, int height)
 	{

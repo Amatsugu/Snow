@@ -24,7 +24,7 @@ public class Level
 	private List<Particle> particles = new ArrayList<Particle>();
 	private List<Player> players = new ArrayList<Player>();
 
-	public static Level spawnLevel = new SpawnLevel("/levels/SpawnLevel.png");
+	public static Level spawnLevel = new SpawnLevel("/levels/spawnLevel.png");
 
 	private Comparator<Node> nodeSorter = new Comparator<Node>()
 	{
@@ -153,10 +153,10 @@ public class Level
 	public void Render(int xScroll, int yScroll, Screen screen)
 	{
 		screen.SetOffset(xScroll, yScroll);
-		int x0 = xScroll >> 4;
-		int x1 = (xScroll + screen.width + 16) >> 4;
-		int y0 = yScroll >> 4;
-		int y1 = (yScroll + screen.height + 16) >> 4;
+		int x0 = Math.round(xScroll >> 4);
+		int x1 = Math.round((xScroll + screen.width + 16) >> 4);
+		int y0 = Math.round(yScroll >> 4);
+		int y1 = Math.round((yScroll + screen.height + 16) >> 4);
 
 		for(int y = y0; y < y1; y++)
 		{
